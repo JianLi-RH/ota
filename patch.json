@@ -1,0 +1,23 @@
+{
+  "nodes": [
+    {
+      "version": "4.14.0-0.nightly-2023-06-11-212615",
+      "payload": "registry.ci.openshift.org/ocp/release:4.14.0-0.nightly-2023-06-11-212615",
+      "metadata": {
+        "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.14.0-0.nightly/release/4.14.0-0.nightly-2023-06-11-212615",
+	"io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,nightly-4.14"
+      }
+    },
+    {
+      "version": "4.14.0-ec.1-x86_64",
+      "payload": "quay.io/openshift-release-dev/ocp-release:4.14.0-ec.1-x86_64",
+      "metadata": {
+        "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-dev-preview/release/4.14.0-ec.1",
+	"io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,nightly-4.14"
+      }
+    }
+  ],
+  "edges": [
+    [0,1]
+  ]
+}

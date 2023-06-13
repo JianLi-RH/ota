@@ -10,7 +10,7 @@
     },
     {
       "version": "4.14.0-ec.1",
-      "payload": "registry.ci.openshift.org/ocp/release@sha256:287a7ba3d0bbe6e135061b6d51810b59a6e6c063a94859dc4f54c9d491b96c87",
+      "payload": "registry.ci.openshift.org/ocp/4-dev-preview@sha256:287a7ba3d0bbe6e135061b6d51810b59a6e6c063a94859dc4f54c9d491b96c87",
       "metadata": {
         "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-dev-preview/release/4.14.0-ec.1",
 	"io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,nightly-4.14"

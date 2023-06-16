@@ -1,0 +1,1 @@
+oc patch clusterversion version --type json -p '[{"op": "add", "path": "/spec/channel", "value": "stable-4.13"}, {"op": "add", "path": "/spec/upstream", "value": "https://raw.githubusercontent.com/JianLi-RH/ota/main/patch.json"}]'

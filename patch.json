@@ -1,19 +1,19 @@
 {
   "nodes": [
     {
-      "version": "4.13.0-0.nightly-2023-06-15-222927",
-      "payload": "registry.ci.openshift.org/ocp/release@sha256:827f5487749c7e418fb69fa87dbd4ec0347d6053795c72c67e6bc38e6671fc23",
+      "version": "4.12.0-0.nightly-2023-06-14-024308",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:5d4ff0748fcf64563de66a1e1bbdd21312ae00b4a58d54de828a0c69f1e5692d",
       "metadata": {
-        "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.13.0-0.nightly/release/4.13.0-0.nightly-2023-06-15-222927",
-        "io.openshift.upgrades.graph.release.channels": "stable-4.13,nightly-4.13"
+        "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.12.0-0.nightly/release/4.12.0-0.nightly-2023-06-14-024308",
+        "io.openshift.upgrades.graph.release.channels": "nightly-4.12,stable-4.13,nightly-4.13"
       }
     },
     {
-      "version": "4.13.0",
-      "payload": "quay.io/openshift-release-dev/ocp-release@sha256:74b23ed4bbb593195a721373ed6693687a9b444c97065ce8ac653ba464375711",
+      "version": "4.12.0-0.nightly-2023-06-15-091818",
+      "payload": "quay.io/openshift-release-dev/ocp-release@sha256:d44e22fc05d00352c46409b6707cd0fb0d92fc3eb8488483786f51eff7102981",
       "metadata": {
-        "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.13.0",
-	"io.openshift.upgrades.graph.release.channels": "stable-4.13,nightly-4.13"
+        "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.12.0-0.nightly/release/4.12.0-0.nightly-2023-06-15-091818",
+	      "io.openshift.upgrades.graph.release.channels": "nightly-4.12,stable-4.13,nightly-4.13"
       }
     }
   ],

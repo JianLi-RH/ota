@@ -10,7 +10,7 @@
     },
     {
       "version": "4.12.0-0.nightly-2023-06-19-183454",
-      "payload": "quay.io/openshift-release-dev/ocp-release@sha256:1f1cf2c7fae766e7920983d8d2018a5a1b2f00a8866c8401f88718d71f2c9818",
+      "payload": "registry.ci.openshift.org/ocp/release@sha256:1f1cf2c7fae766e7920983d8d2018a5a1b2f00a8866c8401f88718d71f2c9818",
       "metadata": {
         "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.12.0-0.nightly/release/4.12.0-0.nightly-2023-06-19-183454",
 	      "io.openshift.upgrades.graph.release.channels": "nightly-4.12,stable-4.13,nightly-4.13"

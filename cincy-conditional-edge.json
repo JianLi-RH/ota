@@ -1,97 +1,97 @@
 {
-    "nodes": [
-      {
-        "version": "4.12.0-0.nightly-2023-06-14-024308",
-        "payload": "registry.ci.openshift.org/ocp/release@sha256:5d4ff0748fcf64563de66a1e1bbdd21312ae00b4a58d54de828a0c69f1e5692d"
-      },
-      {
-        "version": "4.12.0-0.nightly-2023-06-15-091818",
-        "payload": "registry.ci.openshift.org/ocp/release@sha256:d44e22fc05d00352c46409b6707cd0fb0d92fc3eb8488483786f51eff7102981"
-      },
-      {
-        "version": "4.12.0-0.nightly-2023-06-19-183454",
-        "payload": "registry.ci.openshift.org/ocp/release@sha256:1f1cf2c7fae766e7920983d8d2018a5a1b2f00a8866c8401f88718d71f2c9818"
-      },
-      {
-        "version": "4.12.0-0.nightly-2023-06-20-121954",
-        "payload": "registry.ci.openshift.org/ocp/release@sha256:4a3bc7ab90f89a89ce81a3e81dc42cc8b6809e72151f033eeb2805bf29bb1471"
-      }
-    ],
-    "edges": [
-      [0,1],
-      [0,2],
-      [0,3]
-    ],
-    "conditionalEdges":[
-      {
-        "edges": [
-          {"from": "4.12.0-0.nightly-2023-06-14-024308", "to": "4.12.0-0.nightly-2023-06-15-091818"}
-        ],
-        "risks": [
-          {
-            "url": "https://bug.example.com/a",
-            "name": "SomeInvokerThing",
-            "message": "On clusters on default invoker user, this imaginary bug can happen.",
-            "matchingRules": [
-              {
-                "type": "PromQL",
-                "promql": {
-                  "promql": "cluster_installer"
-                }
+  "nodes": [
+    {
+      "version": "4.10.0-0.nightly-2023-06-25-132139",
+      "payload": "registry.ci.openshift.org/ocp/release@sha256:d4df12a2fa6c65278cb7f478feecaf6cdf157d4e52be2bf01c5511adccc79e9f"
+    },
+    {
+      "version": "4.11.0-0.nightly-2023-06-21-192345",
+      "payload": "registry.ci.openshift.org/ocp/release@sha256:b94a57687d6ddebff6d29bc1a4dad0437140badae37c3c09fae45dbe0d8c1ee6"
+    },
+    {
+      "version": "4.11.0-0.nightly-2023-06-23-220648",
+      "payload": "registry.ci.openshift.org/ocp/release@sha256:22e7f886642524713a87cc9fa48b59f6c9939295ea15bd21baaebdef7171db8e"
+    },
+    {
+      "version": "4.11.39",
+      "payload": "quay.io/openshift-release-dev/ocp-release@sha256:3545730c2018e0b092d6132b31068e517cbe99b99c52c54f2a9afad61e051e3d"
+    }
+  ],
+  "edges": [
+    [0,1],
+    [0,2],
+    [0,3]
+  ],
+  "conditionalEdges":[
+    {
+      "edges": [
+        {"from": "4.10.0-0.nightly-2023-06-25-132139", "to": "4.11.0-0.nightly-2023-06-21-192345"}
+      ],
+      "risks": [
+        {
+          "url": "https://bug.example.com/a",
+          "name": "SomeInvokerThing",
+          "message": "On clusters on default invoker user, this imaginary bug can happen.",
+          "matchingRules": [
+            {
+              "type": "PromQL",
+              "promql": {
+                "promql": "cluster_installer"
               }
-            ]
-          },
-          {
-            "url": "https://bug.example.com/b",
-            "name": "SomeChannelThing",
-            "message": "On clusters with the channel set to 'buggy', this imaginary bug can happen.",
-            "matchingRules": [
-              {
-                "type": "PromQL",
-                "promql": {
-                  "promql": "group(cluster_version_available_updates{channel=\"buggy\"})\nor\n0 * group(cluster_version_available_updates{channel!=\"buggy\"})"
-                }
+            }
+          ]
+        },
+        {
+          "url": "https://bug.example.com/b",
+          "name": "SomeChannelThing",
+          "message": "On clusters with the channel set to 'buggy', this imaginary bug can happen.",
+          "matchingRules": [
+            {
+              "type": "PromQL",
+              "promql": {
+                "promql": "group(cluster_version_available_updates{channel=\"buggy\"})\nor\n0 * group(cluster_version_available_updates{channel!=\"buggy\"})"
               }
-            ]
-          }
-        ]
-      },
-      {
-        "edges": [
-          {"from": "4.12.0-0.nightly-2023-06-14-024308", "to": "4.12.0-0.nightly-2023-06-20-121954"}
-        ],
-        "risks": [
-          {
-            "url": "https://openshift-release.apps.ci.l2s4.p1.openshiftapps.com/releasestream/4.10.0-0.nightly/release/4.10.0-0.nightly-2021-11-24-075634",
-            "name": "ReleaseIsRejected",
-            "message": "Too many CI failures on this release, so do not update to it",
-            "matchingRules": [
-              {
-                "type": "Always"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "edges": [
+        {"from": "4.10.0-0.nightly-2023-06-25-132139", "to": "4.11.39"}
+      ],
+      "risks": [
+        {
+          "url": "https://openshift-release.apps.ci.l2s4.p1.openshiftapps.com/releasestream/4.10.0-0.nightly/release/4.10.0-0.nightly-2021-11-24-075634",
+          "name": "ReleaseIsRejected",
+          "message": "Too many CI failures on this release, so do not update to it",
+          "matchingRules": [
+            {
+              "type": "Always"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "edges": [
+        {"from": "4.10.0-0.nightly-2023-06-25-132139", "to": "4.11.0-0.nightly-2023-06-23-220648"}
+      ],
+      "risks": [
+        {
+          "url": "https://bug.example.com/c",
+          "name": "SomeInfrastructureThing",
+          "message": "Clusters on nonexist provider, this imaginary bug can happen.",
+          "matchingRules": [
+            {
+              "type": "PromQL",
+              "promql": {
+                "promql": "cluster_infrastructure_provider{type=~\"nonexist\"}\nor\n0 * cluster_infrastructure_provider"
               }
-            ]
-          }
-        ]
-      },
-      {
-        "edges": [
-          {"from": "4.12.0-0.nightly-2023-06-14-024308", "to": "4.12.0-0.nightly-2023-06-19-183454"}
-        ],
-        "risks": [
-          {
-            "url": "https://bug.example.com/c",
-            "name": "SomeInfrastructureThing",
-            "message": "Clusters on nonexist provider, this imaginary bug can happen.",
-            "matchingRules": [
-              {
-                "type": "PromQL",
-                "promql": {
-                  "promql": "cluster_infrastructure_provider{type=~\"nonexist\"}\nor\n0 * cluster_infrastructure_provider"
-                }
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

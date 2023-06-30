@@ -29,3 +29,41 @@ prometheus-k8s-openshift-monitoring.apps.jianl062101.qe.devcluster.openshift.com
 curl -s -k -H "Authorization: Bearer $token" https://$route/api/v1/alerts | jq -r '.data.alerts[]| select(.labels.alertname == "ClusterOperatorDown")|.state'
 
 curl -s -k -H "Authorization: Bearer $(oc411 -n openshift-monitoring create token prometheus-k8s)"  https://$(oc411 get route prometheus-k8s -n openshift-monitoring --no-headers|awk '{print $2}')/api/v1/alerts |  jq -r '.data.alerts[]| select(.labels.alertname == "ClusterOperatorDown")|.state'
+
+
+
+# ack
+[root@localhost ~]# oc411 -n openshift-config-managed get configmap admin-gates -o json | jq -r '.data|keys[]'
+ack-4.11-kube-1.25-api-removals-in-4.12
+[root@localhost ~]# 
+
+oc -n openshift-config patch cm admin-acks --patch '{"data":{"ack-4.11-kube-1.25-api-removals-in-4.12":"true"}}' --type=merge
+
+
+
+
+[root@localhost ~]# oc411 edit clusterversion version
+clusterversion.config.openshift.io/version edited
+[root@localhost ~]# oc411 get clusterversion version -o json | jq '.spec.capabilities'
+{
+  "additionalEnabledCapabilities": [
+    "marketplace",
+    "baremetal"
+  ],
+  "baselineCapabilitySet": "None"
+}
+
+
+
+# EUS Upgrade 只有偶数版本才有EUS
+# Pause the worker pool
+#. Pause the worker pool
+oc patch --type=merge --patch='{"spec":{"paused":true}}' machineconfigpool/worker
+oc get mcp worker -ojson| jq .spec.paused
+true
+
+
+# 删除channel
+oc patch clusterversion version --type json -p '[{"op": "remove", "path": "/spec/channel"}]'
+
+

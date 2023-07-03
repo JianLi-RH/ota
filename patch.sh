@@ -1,4 +1,4 @@
-oc patch clusterversion version --type json -p '[{"op": "add", "path": "/spec/channel", "value": "stable-4.13"}, {"op": "add", "path": "/spec/upstream", "value": "https://raw.githubusercontent.com/JianLi-RH/ota/main/patch.json"}]'
+oc410 patch clusterversion version --type json -p '[{"op": "add", "path": "/spec/channel", "value": "eus-4.12"}, {"op": "add", "path": "/spec/upstream", "value": "https://raw.githubusercontent.com/JianLi-RH/ota/main/eus.json"}]'
 
 
 oc patch clusterversion version --type=merge -p '{"spec": {"overrides":[{"kind": "Deployment", "name": "network-operator", "namespace": "openshift-network-operator", "unmanaged": true, "group": "apps"}]}}'
@@ -67,3 +67,11 @@ true
 oc patch clusterversion version --type json -p '[{"op": "remove", "path": "/spec/channel"}]'
 
 
+
+# Pause the worker pool
+oc patch --type=merge --patch='{"spec":{"paused":true}}' machineconfigpool/worker
+# Unpause
+oc412 patch --type=merge --patch='{"spec":{"paused":false}}' machineconfigpool/worker
+[root@localhost ~]# oc412 get mcp worker -ojson| jq .spec.paused
+false
+[root@localhost ~]# 

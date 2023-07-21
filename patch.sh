@@ -26,18 +26,9 @@ token=`oc -n openshift-monitoring create token prometheus-k8s`
 route=`oc get route prometheus-k8s -n openshift-monitoring -ojsonpath='{.status.ingress[].host}'`
 echo $route
 prometheus-k8s-openshift-monitoring.apps.jianl062101.qe.devcluster.openshift.com
-curl -s -k -H "Authorization: Bearer $token" https://$route/api/v1/alerts | jq -r '.data.alerts[]| select(.labels.alertname == "ClusterOperatorDown")|.state'
+curl -s -k -H "Authorization: Bearer $token" https://$route/api/v1/alerts | jq -r '.data.alerts[]| select(.labels.alertname == "CannotRetrieveUpdates")|.state'
 
 curl -s -k -H "Authorization: Bearer $(oc411 -n openshift-monitoring create token prometheus-k8s)"  https://$(oc411 get route prometheus-k8s -n openshift-monitoring --no-headers|awk '{print $2}')/api/v1/alerts |  jq -r '.data.alerts[]| select(.labels.alertname == "ClusterOperatorDown")|.state'
-
-
-
-# ack
-[root@localhost ~]# oc411 -n openshift-config-managed get configmap admin-gates -o json | jq -r '.data|keys[]'
-ack-4.11-kube-1.25-api-removals-in-4.12
-[root@localhost ~]# 
-
-oc -n openshift-config patch cm admin-acks --patch '{"data":{"ack-4.11-kube-1.25-api-removals-in-4.12":"true"}}' --type=merge
 
 
 
@@ -75,3 +66,7 @@ oc412 patch --type=merge --patch='{"spec":{"paused":false}}' machineconfigpool/w
 [root@localhost ~]# oc412 get mcp worker -ojson| jq .spec.paused
 false
 [root@localhost ~]# 
+
+
+# Disable the default catalog source
+oc412 patch OperatorHub cluster --type json -p '[{"op": "add", "path": "/spec/disableAllDefaultSources", "value": true}]'

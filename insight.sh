@@ -6,4 +6,4 @@ oc extract secret/pull-secret -n openshift-config --to=.
 # Save the file.
 
 # update the global pull secret
-oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson=<pull_secret_location> 
+oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson=.dockerconfigjson

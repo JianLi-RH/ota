@@ -1,5 +1,7 @@
-oc410 patch clusterversion version --type json -p '[{"op": "add", "path": "/spec/channel", "value": "eus-4.12"}, {"op": "add", "path": "/spec/upstream", "value": "https://raw.githubusercontent.com/JianLi-RH/ota/main/eus.json"}]'
+oc413 patch clusterversion version --type json -p '[{"op": "add", "path": "/spec/channel", "value": "candidate-4.13"}, {"op": "add", "path": "/spec/upstream", "value": "https://raw.githubusercontent.com/JianLi-RH/ota/main/patch.json"}]'
 
+
+oc413 patch clusterversion version --type json -p '[{"op": "add", "path": "/spec/channel", "value": "candidate-4.13"}]'
 
 oc patch clusterversion version --type=merge -p '{"spec": {"overrides":[{"kind": "Deployment", "name": "network-operator", "namespace": "openshift-network-operator", "unmanaged": true, "group": "apps"}]}}'
 oc patch clusterversion version --type=json -p '[{"op": "remove","path":"/spec/overrides"}]'

@@ -1,3 +1,32 @@
+https://docs.openshift.com/container-platform/4.13/updating/updating-restricted-network-cluster/restricted-network-update-osus.html#update-service-install-cli_updating-restricted-network-cluster-osus
+
+
+
+1. Build and mirror graph-data container image to local registry as Non-Root User
+# podman build -f ./Dockerfile -t ${DIS_REGISTRY}/rh-osbs/cincinnati-graph-data-container:v4.6.0
+# podman push ${DIS_REGISTRY}/rh-osbs/cincinnati-graph-data-container:v4.6.0
+
+
+oc get catalogsource -n openshift-marketplace
+
+
+# Create UpdateService resouce
+# cat cincy.yaml 
+apiVersion: cincinnati.openshift.io/v1beta1
+kind: UpdateService
+metadata:
+  name: my-cincy
+  namespace: osus
+spec:
+  replicas: 1
+  releases: "quay.io/openshift-release-dev/ocp-release"
+  graphDataImage: "quay.io/openshifttest/graph-data:v5.0.0"
+
+# oc411 create -f cincy.yaml 
+cincinnati.cincinnati.openshift.io/my-cincy created
+
+
+
 oc create ns osus
 
 cat <<EOF > og.yaml 
@@ -21,12 +50,27 @@ metadata:
   namespace: osus
 spec:
   channel: v1
-  name: cincinnati-operator 
-  source: osus-cs
+  name: cincinnati-operator
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
+  startingCSV: update-service-operator.v5.0.0
+  installPlanApproval: Manual
 EOF
 oc create -f sub.yaml 
 
+# manual 的operator需要在UI上approve
+
+# Automatic
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: update-service-subscription
+spec:
+  channel: v1
+  installPlanApproval: "Automatic"
+  source: "redhat-operators" 
+  sourceNamespace: "openshift-marketplace"
+  name: "cincinnati-operator"
 
 
 # oc delete sub osus-sub -n osus

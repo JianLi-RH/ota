@@ -120,3 +120,43 @@ https://docs.openshift.com/container-platform/4.6/networking/enable-cluster-wide
 oc get -n openshift-ingress-operator secret router-ca -o jsonpath="{.data.tls\.crt}" | base64 -d >ca-bundle.crt
 oc -n openshift-config create configmap osus-ca --from-file=ca-bundle.crt
 oc patch proxy cluster --type json -p '[{"op": "add", "path": "/spec/trustedCA/name", "value": "osus-ca"}]'
+
+
+
+
+
+############################################
+# Use upshift.mirror-registry.qe.devcluster.openshift.com:5000 (dummy/dummy) as the release in update service
+1
+oc adm release mirror -a config.json --from=quay.io/openshift-release-dev/ocp-release:4.11.28-x86_64 \
+  --to=upshift.mirror-registry.qe.devcluster.openshift.com:5000/openshift-release-dev/ocp-release \
+  --to-release-image=upshift.mirror-registry.qe.devcluster.openshift.com:5000/ocp-release:4.11.28-x86_64
+2
+#手动改cluster 的pull secret
+oc extract secret/pull-secret -n openshift-config --confirm
+#.dockerconfigjson is generated, add auth of your registry to the file
+oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson=.dockerconfigjson
+
+# 创建trusted_ca.yaml
+使用： https://gitlab.cee.redhat.com/aosqe/flexy-templates/-/blob/master/functionality-testing/certs/all-in-one.9/client_ca.crt
+
+cert_of_local_registry=$(cat client_ca.crt)
+
+cat <<EOF >trusted_ca.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: trusted-ca
+data:
+  updateservice-registry: |
+    $cert_of_local_registry
+  upshift.mirror-registry.qe.devcluster.openshift.com.5000: |
+    $cert_of_local_registry
+EOF
+
+oc -n openshift-config create -f  trusted_ca.yaml
+oc patch image.config.openshift.io cluster -p '{"spec":{"additionalTrustedCA":{"name":"trusted-ca"}}}' --type merge
+
+
+
+https://gitlab.cee.redhat.com/aosqe/flexy-templates/-/blob/master/functionality-testing/certs/all-in-one.9/client_ca.crt

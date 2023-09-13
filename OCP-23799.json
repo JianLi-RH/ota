@@ -15,20 +15,6 @@
         }
       },
       {
-        "version": "4.14.0-rc.0",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:1d2cc38cbd94c532dc822ff793f46b23a93b76b400f7d92b13c1e1da042c88fe",
-        "metadata": {
-      "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.14"
-        }
-      },
-      {
-        "version": "4.14.0-ec.4",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:caf073ce29232978c331d421c06ca5c2736ce5461962775fdd760b05fb2496a0",
-        "metadata": {
-      "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.14"
-        }
-      },
-      {
         "version": "4.14.0-0.nightly-2023-09-12-024050",
         "payload": "registry.ci.openshift.org/ocp/release@sha256:f578403987bba590b6e75d1fb3140fc1861814ddedb233624fe86d1db2bd5043",
         "metadata": {
@@ -38,8 +24,6 @@
     ],
     "edges": [
       [0,1],
-      [0,2],
-      [0,3],
-      [0,4]
+      [0,2]
     ]
   }

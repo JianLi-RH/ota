@@ -20,11 +20,19 @@
         "metadata": {
             "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.14"
         }
+      },
+      {
+        "version": "4.14.0-0.nightly-2023-09-12-195514",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:8043b6abc8b1cde51a3a5649c89511f7761613d7468123ed0ea7cc939501690e",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.14"
+        }
       }
     ],
     "edges": [
       [0,1],
-      [0,2]
+      [0,2],
+      [0,3]
     ],
     "conditionalEdges":[
       {

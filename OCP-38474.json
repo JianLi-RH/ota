@@ -1,0 +1,21 @@
+{
+    "nodes": [
+      {
+        "version": "4.13.0-0.nightly-2023-09-12-074803",
+        "payload": "example.com@sha256:e03f07af4872b73f425c6095cabba4600106b063005d5236991f7225fedd9704",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.14"
+        }
+      },
+      {
+        "version": "4.14.0-0.nightly-2023-09-12-195514",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:8043b6abc8b1cde51a3a5649c89511f7761613d7468123ed0ea7cc939501690e",
+        "metadata": {
+      "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.14"
+        }
+      }
+    ],
+    "edges": [
+      [0,1]
+    ]
+  }

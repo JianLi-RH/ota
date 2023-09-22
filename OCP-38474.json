@@ -1,8 +1,8 @@
 {
     "nodes": [
       {
-        "version": "4.13.13",
-        "payload": "example.com@sha256:d62495768e335c79a215ba56771ff5ae97e3cbb2bf49ed8fb3f6cefabcdc0f17",
+        "version": "4.14.0-rc.0",
+        "payload": "example.com@sha256:1d2cc38cbd94c532dc822ff793f46b23a93b76b400f7d92b13c1e1da042c88fe",
         "metadata": {
             "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.14"
         }

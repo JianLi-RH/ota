@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "version": "4.15.16",
+      "payload": "quay.io/openshift-release-dev/ocp-release@sha256:4bdebcbc36c2b4c383b70cf5e23b168f8bf445eba42fc8f331643608a60398e8",
+      "metadata": {
+        "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.15.16",
+	      "io.openshift.upgrades.graph.release.channels": "stable-4.16"
+      }
+    },
+    {
+      "version": "4.16.0-rc.2",
+      "payload": "quay.io/openshift-release-dev/ocp-release@sha256:d93db95ec59b2f51ff45fdecd54b4dd9144521e3d099fef151c189598200cf24",
+      "metadata": {
+        "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.16.0-rc.2",
+	      "io.openshift.upgrades.graph.release.channels": "stable-4.16"
+      }
+    }
+  ],
+  "edges": [
+    [0, 1]
+  ],
+  "conditionalEdges": [
+    {
+      "edges": [{ "from": "4.15.16", "to": "4.16.0-rc.2" }],
+      "risks": [
+        {
+          "url": "// example.com",
+          "name": "InvalidURL",
+          "message": "Invalid URL.",
+          "matchingRules": [
+            {
+              "type": "PromQL",
+              "promql": {
+                "promql": "cluster_installer"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

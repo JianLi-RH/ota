@@ -1,10 +1,13 @@
+https://docs.openshift.com/container-platform/4.15/updating/updating_a_cluster/updating_disconnected_cluster/disconnected-update-osus.html#updating-restricted-network-cluster-OSUS
+
+
 ####################################### 安装Subscription #############################################
 # OCP-35869 - install/uninstall osus operator from OperatorHub through CLI	
 # https://polarion.engineering.redhat.com/polarion/#/project/OSE/workitem?id=OCP-35869
 # https://docs.openshift.com/container-platform/4.15/updating/updating_a_cluster/updating_disconnected_cluster/disconnected-update-osus.html#update-service-install-cli_updating-restricted-network-cluster-osus
 
 # 创建namespace
-oc create ns osus
+oc create ns openshift-update-service
 
 # 创建OperatorGroup
 cat <<EOF > og.yaml 
@@ -12,36 +15,39 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: osus-og
-  namespace: osus
+  namespace: openshift-update-service
 spec:
   targetNamespaces:
-  - osus
+  - openshift-update-service
 EOF
 
-oc create -f og.yaml 
+oc create -f og.yaml
 
 # 查看已安装的CatalogSource
 oc get catalogsource -n openshift-marketplace
 
 # 安装subscription
 ## 安装最新版本（默认）subscription (Operator)
-cat <<EOF > sub.yaml 
+cat <<EOF > sub.yaml
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: osus-sub
-  namespace: osus
+  namespace: openshift-update-service
 spec:
   channel: v1
-  name: cincinnati-operator 
-  source: 上面的source
+  name: cincinnati-operator
+  source: qe-app-registry
   sourceNamespace: openshift-marketplace
 EOF
+
+# source: 上面的source
 
 ## 安装指定版本subscription
 
 
-oc create -f sub.yaml 
+oc create -f sub.yaml
+oc -n openshift-update-service get csv
 
 
 ####################################### 创建 graph data container image #############################################
@@ -51,7 +57,7 @@ podman push registry.example.com/openshift/graph-data:latest
 
 # For example:
 # DIS_REGISTRY可以在cluster_info.yaml里查看
-DIS_REGISTRY=jianl042301.mirror-registry.qe.gcp.devcluster.openshift.com:5000
+DIS_REGISTRY=ec2-3-12-76-22.us-east-2.compute.amazonaws.com:5000
 podman build -f ./Dockerfile -t ${DIS_REGISTRY}/openshift/graph-data:latest
 podman login ${DIS_REGISTRY}
 podman push ${DIS_REGISTRY}/openshift/graph-data:latest
@@ -59,14 +65,11 @@ podman push ${DIS_REGISTRY}/openshift/graph-data:latest
 
 
 ####################################### 将 payload mirror 到registry #############################################
-DIS_REGISTRY=jianl042301.mirror-registry.qe.gcp.devcluster.openshift.com:5000
-oc adm release mirror --from=quay.io/openshift-release-dev/ocp-release:4.16.0-ec.5-x86_64 \
+DIS_REGISTRY=ec2-3-12-76-22.us-east-2.compute.amazonaws.com:5000
+oc adm release mirror -a config.json --from=quay.io/openshift-release-dev/ocp-release:4.16.0-rc.0-x86_64 \
     --to=${DIS_REGISTRY}/openshift-release-dev/ocp-release \
-    --to-release-image=${DIS_REGISTRY}/ocp-release:4.16.0-ec.5-x86_64
+    --to-release-image=${DIS_REGISTRY}/ocp-release:4.16.0-rc.0-x86_64
 
-oc adm release mirror --from=quay.io/openshift-release-dev/ocp-release:4.16.0-ec.5-x86_64 \
-    --to=${DIS_REGISTRY}/openshift-release-dev/ocp-release \
-    --to-release-image=${DIS_REGISTRY}/ocp-release:4.16.0-ec.5-x86_64
 
 ####################################### 安装 Update Service Instance #############################################
 # https://docs.openshift.com/container-platform/4.15/updating/updating_a_cluster/updating_disconnected_cluster/disconnected-update-osus.html#update-service-create-service-cli_updating-restricted-network-cluster-osus

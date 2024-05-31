@@ -22,7 +22,7 @@
   ],
   "conditionalEdges": [
     {
-      "edges": [{ "from": "4.15.16-x86_64", "to": "4.16.0-rc.2-x86_64" }],
+      "edges": [{ "from": "4.15.16", "to": "4.16.0-rc.2" }],
       "risks": [
         {
           "url": "// example.com",

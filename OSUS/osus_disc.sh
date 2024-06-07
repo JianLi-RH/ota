@@ -8,6 +8,7 @@ https://docs.openshift.com/container-platform/4.15/updating/updating_a_cluster/u
 
 # 创建namespace
 oc create ns openshift-update-service
+oc create ns openshift-update-service
 
 # 创建OperatorGroup
 cat <<EOF > og.yaml 
@@ -16,8 +17,10 @@ kind: OperatorGroup
 metadata:
   name: osus-og
   namespace: openshift-update-service
+  namespace: openshift-update-service
 spec:
   targetNamespaces:
+  - openshift-update-service
   - openshift-update-service
 EOF
 
@@ -34,10 +37,11 @@ kind: Subscription
 metadata:
   name: osus-sub
   namespace: openshift-update-service
+  namespace: openshift-update-service
 spec:
   channel: v1
-  name: cincinnati-operator
-  source: qe-app-registry
+  name: cincinnati-operator 
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
 EOF
 
@@ -61,6 +65,9 @@ DIS_REGISTRY=ec2-3-12-76-22.us-east-2.compute.amazonaws.com:5000
 podman build -f ./Dockerfile -t ${DIS_REGISTRY}/openshift/graph-data:latest
 podman login ${DIS_REGISTRY}
 podman push ${DIS_REGISTRY}/openshift/graph-data:latest
+
+# Stage cincinnati:
+https://api.stage.openshift.com/api/upgrades_info/v1/graph
 
 
 

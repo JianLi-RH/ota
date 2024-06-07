@@ -127,8 +127,13 @@ cincinnati.cincinnati.openshift.io/my-cincy created
 
 
 # 检查 OSUS Service URL:
-oc get route my-cincy-policy-engine-route -o jsonpath='{.spec.host}' -n osus
-curl -skH 'Accept:application/json' "https://$url/api/upgrades_info/v1/graph?channel=stable-4.10" -o /dev/null -w "status: %{http_code}\n"
+oc get route my-cincy-policy-engine-route -o jsonpath='{.spec.host}' -n openshift-update-service
+# 也可以用下面方法获取route
+oc get -o jsonpath='{.status.policyEngineURI}/api/upgrades_info/v1/graph{"\n"}' updateservice sample -n openshift-update-service
+while sleep 1; do POLICY_ENGINE_GRAPH_URI="$(oc -n openshift-update-service get -o jsonpath='{.status.policyEngineURI}/api/upgrades_info/v1/graph{"\n"}' updateservice sample)"; SCHEME="${POLICY_ENGINE_GRAPH_URI%%:*}"; if test "${SCHEME}" = http -o "${SCHEME}" = https; then break; fi; done
+# 验证graphdata
+curl -skH 'Accept:application/json' "https://$url/api/upgrades_info/v1/graph?channel=stable-4.16" -o /dev/null -w "status: %{http_code}\n"
+
 
 [root@localhost ~]# curl -skH 'Accept:application/json' "$url?channel=candidate-4.13"|jq .
 {

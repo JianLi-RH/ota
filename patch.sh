@@ -35,18 +35,6 @@ curl -s -k -H "Authorization: Bearer $(oc411 -n openshift-monitoring create toke
 
 
 
-[root@localhost ~]# oc411 edit clusterversion version
-clusterversion.config.openshift.io/version edited
-[root@localhost ~]# oc411 get clusterversion version -o json | jq '.spec.capabilities'
-{
-  "additionalEnabledCapabilities": [
-    "marketplace",
-    "baremetal"
-  ],
-  "baselineCapabilitySet": "None"
-}
-
-
 
 # EUS Upgrade 只有偶数版本才有EUS
 # Pause the worker pool

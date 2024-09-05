@@ -1,17 +1,17 @@
 {
     "nodes": [
       {
-        "version": "4.13.0-0.nightly-2023-09-12-074803",
-        "payload": "registry.ci.openshift.org/ocp/release@sha256:e03f07af4872b73f425c6095cabba4600106b063005d5236991f7225fedd9704",
+        "version": "4.16.10",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:793bac91943944692d72a61c47a3102edb70fb2948cdf54019f06376a87298ad",
         "metadata": {
-            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.14"
+            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.17"
         }
       },
       {
-        "version": "4.14.0-rc.0",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:1d2cc38cbd94c532dc822ff793f46b23a93b76b400f7d92b13c1e1da042c88fe",
+        "version": "4.17.0-rc.0",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:58c9cdeddb33100ee29441e374467592cbd39c3fc56552c57bf2a183a85025f3",
         "metadata": {
-      "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.14"
+      "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.17"
         }
       }
     ],

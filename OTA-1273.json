@@ -1,15 +1,29 @@
 {
     "nodes": [
       {
-        "version": "4.18.0-0.nightly-2024-11-06-051814",
-        "payload": "registry.ci.openshift.org/ocp/release@sha256:fae7fcf1643f5dc4f50d9c6aaab22d65898d8e7359cfb7fbb75f50f5461061aa",
+        "version": "4.17.0-0.nightly-2024-11-07-000233",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:f50b2682729b4734d45825579c4403949e5a79b3c9b0247f6f36692e5a59d127",
         "metadata": {
-            "io.openshift.upgrades.graph.release.channels": "channel-a,candidate-4.18,stable-4.18"
+            "io.openshift.upgrades.graph.release.channels": "channel-a,candidate-4.17,stable-4.17"
         }
       },
       {
-        "version": "4.18.0-ec.3",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:d2d34aafe0adda79953dd928b946ecbda34673180ee9a80d2ee37c123a0f510c",
+        "version": "4.17.2",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:e63e11532f9ee550219f076530ce449a5e2ce6f6179e5ccdaf55ce68092e7021",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "channel-a,candidate-4.17,stable-4.17"
+        }
+      },
+      {
+        "version": "4.17.3",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:2bf757225166a2d1f51370f0bd2ec734bcc8cf759fa1a53ab9531ce8c584c17c",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "channel-a,candidate-4.17,stable-4.17"
+        }
+      },
+      {
+        "version": "4.18.0-0.nightly-2024-11-06-051814",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:fae7fcf1643f5dc4f50d9c6aaab22d65898d8e7359cfb7fbb75f50f5461061aa",
         "metadata": {
             "io.openshift.upgrades.graph.release.channels": "channel-a,candidate-4.18,stable-4.18"
         }
@@ -20,10 +34,20 @@
         "metadata": {
             "io.openshift.upgrades.graph.release.channels": "channel-a,candidate-4.18,stable-4.18"
         }
+      },
+      {
+        "version": "4.18.0-ec.3",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:d2d34aafe0adda79953dd928b946ecbda34673180ee9a80d2ee37c123a0f510c",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "channel-a,candidate-4.18,stable-4.18"
+        }
       }
     ],
     "edges": [
       [0,1],
-      [0,2]
+      [0,2],
+      [0,3],
+      [0,4]
+      [0,5]
     ]
   }

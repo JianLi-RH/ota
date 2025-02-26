@@ -90,9 +90,15 @@ oc adm release mirror -a config.json --from=quay.io/openshift-release-dev/ocp-re
 # 使用前面方法安装完subscription / osus operator之后，可以安装Update Service
 
 # 安装证书
-oc -n openshift-config extract cm/user-ca-bundle --confirm
+# 要想从registry pull image， 必须先添加一个TrustedCA
+# https://docs.openshift.com/container-platform/4.17/cicd/builds/setting-up-trusted-ca.html
+oc -n openshift-config get cm
+oc -n openshift-config extract cm/user-ca-bundle --confirm  # 使用这个的原因是因为flexy-install的cluster已经创建了trustedCA
 oc create -n openshift-config cm trusted-ca --from-file=updateservice-registry=ca-bundle.crt
 oc patch image.config.openshift.io cluster -p '{"spec":{"additionalTrustedCA":{"name":"trusted-ca"}}}' --type merge
+
+
+oc patch image.config.openshift.io cluster --type=json -p '[{"op": "remove","path":"/spec/additionalTrustedCA"}]'
 
 
 # 创建update service 实例
@@ -110,6 +116,7 @@ EOF
 
 oc -n openshift-update-service create -f cincy.yaml
 
+# releases:  quay.io/openshifttest/ocp-release
 
 
 oc get ClusterServiceVersion -n openshift-update-service

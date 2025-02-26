@@ -2,6 +2,12 @@ https://docs.openshift.com/container-platform/4.13/updating/updating-restricted-
 
 # graph-data
 quay.io/openshifttest/graph-data:latest
+# Default cincinnati graph
+{
+  "graphDataImage": "registry.build02.ci.openshift.org/ci-ln-9lsgjgk/stable:nonsign",
+  "releases": "quay.io/openshift-release-dev/ocp-release",
+  "replicas": 2
+}
 
 
 ###############################################################################################################
@@ -25,17 +31,8 @@ https://polarion.engineering.redhat.com/polarion/#/project/OSE/workitem?id=OCP-4
 https://polarion.engineering.redhat.com/polarion/#/project/OSE/workitem?id=OCP-43326
 Mirror graph-data container image to disk then to local registry by using oc
 
-# cat ./Dockerfile
-FROM registry.access.redhat.com/ubi8/ubi:8.1
-
-RUN curl -L -o cincinnati-graph-data.tar.gz https://api.openshift.com/api/upgrades_info/graph-data
-
-RUN mkdir -p /var/lib/cincinnati-graph-data && tar xvzf cincinnati-graph-data.tar.gz -C /var/lib/cincinnati-graph-data/ --no-overwrite-dir --no-same-owner
-
-CMD ["/bin/bash", "-c" ,"exec cp -rp /var/lib/cincinnati-graph-data/* /var/lib/cincinnati/graph-data"]
-
-# podman build -f Dockerfile -t ${LOCAL_REGISTRY}/rh-osbs/cincinnati-graph-data-container:v5.0.0
-# podman push ${LOCAL_REGISTRY}/rh-osbs/cincinnati-graph-data-container:v5.0.0
+podman build -f Dockerfile -t ${LOCAL_REGISTRY}/rh-osbs/cincinnati-graph-data-container:v5.0.0
+podman push ${LOCAL_REGISTRY}/rh-osbs/cincinnati-graph-data-container:v5.0.0
 ###############################################################################################################
 
 
@@ -176,8 +173,6 @@ oc patch proxy cluster --type json -p '[{"op": "add", "path": "/spec/trustedCA/n
 
 
 
-
-
 ############################################
 # Use upshift.mirror-registry.qe.devcluster.openshift.com:5000 (dummy/dummy) as the release in update service
 1
@@ -185,6 +180,10 @@ oc adm release mirror -a config.json --from=quay.io/openshift-release-dev/ocp-re
   --to=upshift.mirror-registry.qe.devcluster.openshift.com:5000/openshift-release-dev/ocp-release \
   --to-release-image=upshift.mirror-registry.qe.devcluster.openshift.com:5000/ocp-release:4.11.28-x86_64
 
+
+oc adm release mirror -a config.json --from=quay.io/openshift-release-dev/ocp-release:4.17.4-x86_64 \
+  --to=quay.io/rhn_support_jianl/openshift-release-dev/ocp-release \
+  --to-release-image=quay.io/rhn_support_jianl/ocp-release:4.17.4-x86_64
 
 
 
@@ -224,3 +223,8 @@ oc patch image.config.openshift.io cluster -p '{"spec":{"additionalTrustedCA":{"
 oc get  image.config.openshift.io cluster -o json
 # 删除additionalTrustedCA
 oc patch image.config.openshift.io/cluster --type=json -p '[{"op": "remove","path":"/spec/additionalTrustedCA"}]'
+
+
+# Query OpenShift's Update Service Endpoint
+$ curl --silent --header 'Accept:application/json' 'https://api.openshift.com/api/upgrades_info/v1/graph?arch=amd64&channel=stable-4.2'\
+ | jq '. as $graph | $graph.nodes | map(.version == "4.2.13") | index(true) as $orig | $graph.edges | map(select(.[0] == $orig)[1]) | map($graph.nodes[.])'

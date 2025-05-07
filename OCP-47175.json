@@ -1,0 +1,20 @@
+{
+    "nodes": [
+      {
+        "version": "4.19.0-0.nightly-2025-05-06-051838",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:f875185dd89f1e35f1be993d28c559a48b144869e3f28d772d072730e41dfcc9",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        }
+      },
+      {
+        "version": "4.19.0-ec.5",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:fde51d1c35425759c83ea0895d0d4fc0f88f6a49a0d080207f15a7bbe3e9982c",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        }
+      }
+    ],
+    "edges": [
+    ]
+  }

@@ -53,23 +53,6 @@
   "conditionalEdges":[
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-06-051838", "to": "4.19.0-ec.2"}
-      ],
-      "risks": [
-        {
-          "url": "https://openshift-release.apps.ci.l2s4.p1.openshiftapps.com/releasestream/4.10.0-0.nightly/release/4.10.0-0.nightly-2021-11-24-075634",
-          "name": "ReleaseIsRejected!",
-          "message": "ReleaseIsRejected! is invalid",
-          "matchingRules": [
-            {
-              "type": "Always"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "edges": [
         {"from": "4.19.0-0.nightly-2025-05-06-051838", "to": "4.19.0-0.nightly-2025-05-07-130416"}
       ],
       "risks": [
@@ -96,6 +79,23 @@
               "promql": {
                 "promql": "group(cluster_version_available_updates{channel=\"buggy\"})\nor\n0 * group(cluster_version_available_updates{channel!=\"buggy\"})"
               }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "edges": [
+        {"from": "4.19.0-0.nightly-2025-05-06-051838", "to": "4.19.0-ec.2"}
+      ],
+      "risks": [
+        {
+          "url": "https://openshift-release.apps.ci.l2s4.p1.openshiftapps.com/releasestream/4.10.0-0.nightly/release/4.10.0-0.nightly-2021-11-24-075634",
+          "name": "ReleaseIsRejected!",
+          "message": "ReleaseIsRejected! is invalid",
+          "matchingRules": [
+            {
+              "type": "Always"
             }
           ]
         }

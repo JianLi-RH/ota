@@ -1,15 +1,15 @@
 {
   "nodes": [
     {
-      "version": "4.19.0-0.nightly-2025-05-06-051838",
-      "payload": "registry.ci.openshift.org/ocp/release@sha256:f875185dd89f1e35f1be993d28c559a48b144869e3f28d772d072730e41dfcc9",
+      "version": "4.19.0-0.nightly-2025-05-11-153555",
+      "payload": "registry.ci.openshift.org/ocp/release@sha256:5098d6e4065e9c532bad7a6d6ed88d50d754279b64527f73014e33655540fda1",
       "metadata": {
         "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
       }
     },
     {
-      "version": "4.19.0-0.nightly-2025-05-07-130416",
-      "payload": "registry.ci.openshift.org/ocp/release@sha256:34aeb5d06b922c8443f62cdb3e07f88ddf9d7222502b9ba18fbfd524d973f2fd",
+      "version": "4.19.0-0.nightly-2025-05-11-230421",
+      "payload": "registry.ci.openshift.org/ocp/release@sha256:09b8d43ce2736e515b309d0d30b15127ad2382c0300836bede952cbfbca77f2d",
       "metadata": {
         "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
       }
@@ -53,7 +53,7 @@
   "conditionalEdges":[
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-06-051838", "to": "4.19.0-0.nightly-2025-05-07-130416"}
+        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-0.nightly-2025-05-11-230421"}
       ],
       "risks": [
         {
@@ -86,7 +86,7 @@
     },
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-06-051838", "to": "4.19.0-ec.2"}
+        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-ec.2"}
       ],
       "risks": [
         {
@@ -103,7 +103,7 @@
     },
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-06-051838", "to": "4.19.0-ec.3"}
+        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-ec.3"}
       ],
       "risks": [
         {
@@ -120,7 +120,7 @@
     },
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-06-051838", "to": "4.19.0-ec.4"}
+        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-ec.4"}
       ],
       "risks": [
         {
@@ -140,7 +140,7 @@
     },
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-06-051838", "to": "4.19.0-ec.5"}
+        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-ec.5"}
       ],
       "risks": [
         {

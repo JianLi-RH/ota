@@ -13,9 +13,17 @@
         "metadata": {
             "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
         }
+      },
+      {
+        "version": "4.21.0-ec.0",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:aaa",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        }
       }
     ],
     "edges": [
-      [0,1]
+      [0,1],
+      [1,2]
     ]
   }

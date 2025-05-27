@@ -1,8 +1,8 @@
 {
     "nodes": [
       {
-        "version": "4.19.0-rc.3",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:8970801dee5031571f971bdf922d351f884065ceb3e441c173c8350b3956a229",
+        "version": "4.19.0-0.nightly-2025-05-26-074247",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:bc7a6fb1ea1e09d572e4c95ae40c5c4c455e000ba1c84fab0b2a7ba6007423e2",
         "metadata": {
             "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
         }

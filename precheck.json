@@ -11,14 +11,14 @@
         "version": "4.20.0-ec.0",
         "payload": "quay.io/openshift-release-dev/ocp-release@sha256:b5bea7566302a82159c42b9fbf37aef3b819cb5a22a9ffd34081b0a2192a071a",
         "metadata": {
-            "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+            "io.openshift.upgrades.graph.release.channels": "candidate-4.19,candidate-4.20"
         }
       },
       {
         "version": "4.21.0-ec.0",
         "payload": "quay.io/openshift-release-dev/ocp-release@sha256:aaa",
         "metadata": {
-            "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+            "io.openshift.upgrades.graph.release.channels": "candidate-4.20"
         }
       }
     ],

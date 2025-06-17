@@ -1,27 +1,27 @@
 {
     "nodes": [
       {
-        "version": "4.17.21",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:875094103228a685ab9c2159f5bb97455a823d137e9da09bfd0e00af9296b042",
+        "version": "4.19.0",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:3482dbdce3a6fb2239684d217bba6fc87453eff3bdb72f5237be4beb22a2160b",
         "metadata": {
-            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.17.21",
-            "io.openshift.upgrades.graph.release.channels": "stable-4.18"
+            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.19.0",
+            "io.openshift.upgrades.graph.release.channels": "stable-4.19"
         }
       },
       {
-        "version": "4.18.16",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:0dac222584991f89a123d85e8c3055f0056e5876fc209b8d4bea7a59e7504d59",
+        "version": "4.19.0-0.nightly-2025-06-16-060026",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:0dac222584991f89a123ddc1ca71288ed7f32215f7b6f47e5b1dd4809d0ecbc5dfcbc574761134239c54485e8c3055f0056e5876fc209b8d4bea7a59e7504d59",
         "metadata": {
-            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.18.16",
-            "io.openshift.upgrades.graph.release.channels": "stable-4.18"
+            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.19.0-0.nightly/release/4.19.0-0.nightly-2025-06-16-060026",
+            "io.openshift.upgrades.graph.release.channels": "stable-4.19"
         }
       },
       {
-        "version": "4.18.17",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:9d24a8cdd67b8f18c99547d5910e4863e7aab5bd888e26670a00dbda0a9d4687",
+        "version": "4.20.0-0.nightly-2025-06-16-162515",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:45f421bea3bace8de6d025c4e57df85428caf30c56157a3c24769d6a1459593f",
         "metadata": {
-            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.18.17",
-            "io.openshift.upgrades.graph.release.channels": "stable-4.18"
+            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.20.0-0.nightly/release/4.20.0-0.nightly-2025-06-16-162515",
+            "io.openshift.upgrades.graph.release.channels": "stable-4.19"
         }
       }
     ],
@@ -32,11 +32,11 @@
     "conditionalEdges":[
       {
         "edges": [
-          {"from": "4.17.21", "to": "4.18.16"}
+          {"from": "4.19.0", "to": "4.19.0-0.nightly-2025-06-16-060026"}
         ],
         "risks": [
           {
-            "url": "https://openshift-release.apps.ci.l2s4.p1.openshiftapps.com/releasestream/4.10.0-0.nightly/release/4.10.0-0.nightly-2021-11-24-075634",
+            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.19.0-0.nightly/release/4.19.0-0.nightly-2025-06-16-060026",
             "name": "ReleaseIsRejected",
             "message": "Too many CI failures on this release, so do not update to it",
             "matchingRules": [

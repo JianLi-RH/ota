@@ -1,11 +1,10 @@
 {
     "nodes": [
       {
-        "version": "4.20.0-0.nightly-2025-07-01-051543",
-        "payload": "registry.ci.openshift.org/ocp/release@sha256:c00dbb768955694cabe901e12aa5c6ac2121fcc77d2c376e2806a07942da5966",
+        "version": "4.20.0-0.nightly-2025-06-20-214016",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:875094103228a685ab9c2159f5bb97455a823d137e9da09bfd0e00af9296b042",
         "metadata": {
-            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.20.0-0.nightly/release/4.20.0-0.nightly-2025-06-16-162515",
-            "io.openshift.upgrades.graph.release.channels": "stable-4.19"
+            "io.openshift.upgrades.graph.release.channels": "channel-a"
         }
       },
       {
@@ -30,11 +29,11 @@
     "conditionalEdges":[
       {
         "edges": [
-          {"from": "4.20.0-0.nightly-2025-07-01-051543", "to": "4.999.999"}
+          {"from": "4.20.0-0.nightly-2025-06-20-214016", "to": "4.999.999"}
         ],
         "risks": [
           {
-            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.19.0-0.nightly/release/4.19.0-0.nightly-2025-06-16-060026",
+            "url": "https://openshift-release.apps.ci.l2s4.p1.openshiftapps.com/releasestream/4.10.0-0.nightly/release/4.10.0-0.nightly-2021-11-24-075634",
             "name": "ReleaseIsRejected",
             "message": "Too many CI failures on this release, so do not update to it",
             "matchingRules": [

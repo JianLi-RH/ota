@@ -55,7 +55,7 @@
   "conditionalEdges":[
     {
       "edges": [
-        {"from": "4.19.3", "to": "4.20.0-ec.1"}
+        {"from": "4.19.3", "to": "4.20.0-ec.2"}
       ],
       "risks": [
         {

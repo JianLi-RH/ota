@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: cincinnati-monitor
+  namespace: cincinnati-quality-experiments
+  name: cincinnati-monitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cincinnati-monitor
+  template:
+    metadata:
+      labels:
+        app: cincinnati-monitor
+    spec:
+      containers:
+      - name: cincinnati-monitor
+        image: quay.io/rhn_support_jianl/monitor:latest
+        ports:
+        - containerPort: 23456

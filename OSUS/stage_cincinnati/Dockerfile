@@ -11,4 +11,3 @@ RUN chmod +x ./check_digest.sh
 
 USER root
 CMD ./check_digest.sh
-USER root

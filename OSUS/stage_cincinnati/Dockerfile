@@ -4,8 +4,11 @@ WORKDIR /
 
 COPY . .
 
-RUN wget https://openshift-release-artifacts.apps.ci.l2s4.p1.openshiftapps.com/4.20.0-0.nightly-2025-07-15-083124/openshift-client-linux-amd64-rhel9-4.20.0-0.nightly-2025-07-15-083124.tar.gz && \
-    tar -xvzf openshift-client-linux-amd64-rhel9-4.20.0-0.nightly-2025-07-15-083124.tar.gz
+RUN downloadURL=$(curl -s https://amd64.ocp.releases.ci.openshift.org/api/v1/releasestream/4.20.0-0.nightly/latest | jq -r ".downloadURL") && \
+    latest_version=$(echo "${downloadURL}" | awk -F "/" '{print $NF}') && \
+    clientDownloadURL="${downloadURL}/openshift-client-linux-amd64-rhel9-${latest_version}.tar.gz" && \
+    wget "${clientDownloadURL}" && \
+    tar -xvzf "openshift-client-linux-amd64-rhel9-${latest_version}.tar.gz"
 
 RUN chmod +x ./check_cincinnati.sh
 

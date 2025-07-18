@@ -13,13 +13,8 @@
 
 version="4.16.1"
 digest_channel="fast-4.16"
-if command -v ./oc >/dev/null 2>&1
-then
-	alias OC=./oc
-else
-	alias OC=oc
-fi
-digest=$(OC image info quay.io/openshift-release-dev/ocp-release:${version}-x86_64 -ojson | jq -r ".digest")
+
+digest=$(./oc image info quay.io/openshift-release-dev/ocp-release:${version}-x86_64 -ojson | jq -r ".digest")
 echo "Expected digest is: ${digest}"
 
 host="https://api.stage.openshift.com"

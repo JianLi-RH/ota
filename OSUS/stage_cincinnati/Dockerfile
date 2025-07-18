@@ -10,4 +10,4 @@ RUN wget https://openshift-release-artifacts.apps.ci.l2s4.p1.openshiftapps.com/4
 RUN chmod +x ./check_digest.sh
 
 USER root
-CMD ./check_digest.sh
+CMD ./check_cincinnati.sh

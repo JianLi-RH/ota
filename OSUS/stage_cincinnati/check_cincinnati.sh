@@ -13,11 +13,11 @@
 
 version="4.16.1"
 digest_channel="fast-4.16"
+host="https://api.stage.openshift.com"
 
-digest=$(./oc image info quay.io/openshift-release-dev/ocp-release:${version}-x86_64 -ojson | jq -r ".digest")
+digest=$(./oc image info "quay.io/openshift-release-dev/ocp-release:${version}-x86_64" -ojson | jq -r ".digest")
 echo "Expected digest is: ${digest}"
 
-host="https://api.stage.openshift.com"
 
 digest_retry=0
 graph_retry=0

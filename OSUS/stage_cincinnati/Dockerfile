@@ -13,4 +13,4 @@ RUN downloadURL=$(curl -s https://amd64.ocp.releases.ci.openshift.org/api/v1/rel
 RUN chmod +x ./check_cincinnati.sh
 
 USER root
-CMD ./check_cincinnati.sh
+CMD source ./check_cincinnati.sh

@@ -20,11 +20,11 @@ spec:
         image: quay.io/rhn_support_jianl/monitor:latest
         ports:
         - containerPort: 23456
-      - name: cincinnati-monitor_spec
+      - name: cincinnati-monitor-spec
         image: quay.io/rhn_support_jianl/monitor_spec:latest
         ports:
         - containerPort: 23457
-      - name: cincinnati-monitor_digest
+      - name: cincinnati-monitor-digest
         image: quay.io/rhn_support_jianl/monitor_digest:latest
         ports:
         - containerPort: 23458

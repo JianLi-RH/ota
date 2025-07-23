@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM registry.ci.openshift.org/ci/tests-private-base:4.20
 
 WORKDIR /
 

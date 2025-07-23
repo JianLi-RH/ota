@@ -10,7 +10,7 @@ RUN downloadURL=$(curl -s https://amd64.ocp.releases.ci.openshift.org/api/v1/rel
     wget "${clientDownloadURL}" && \
     tar -xvzf "openshift-client-linux-amd64-rhel9-${latest_version}.tar.gz"
 
-RUN chmod +x ./check_cincinnati.sh
+RUN chmod +x ./check_cincinnati_digest.sh
 
 USER root
-CMD source ./check_cincinnati.sh
+CMD source ./check_cincinnati_digest.sh

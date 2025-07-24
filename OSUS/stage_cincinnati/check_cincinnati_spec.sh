@@ -17,6 +17,8 @@ function check_parameter() {
         return 1
     fi
 
+    echo "The parameter's spec from graph API is correct: ${parameter}"
+
     return 0
 }
 
@@ -27,10 +29,25 @@ function check_response() {
     responses=$(echo "${res}" | jq "${path}.get.responses")
     content=$(echo "${responses}" | jq '."'"${http_code}"'"' | jq ".content")
     responses_ref=$(echo "$content" | jq -r '."application/json".schema."$ref"')
-    if [[ "${responses_ref}" != "#/components/schemas/GraphError" ]] ; then
-        echo -e "${DATE} Error: failed to get responses/${http_code}/content/application/json from openapi: ref \n ${responses}"
-        return 1
+
+    if [[ "${http_code}" == "200" ]]; then
+        if [[ "${responses_ref}" != "#/components/schemas/Graph" ]] ; then
+            echo -e "${DATE} Error: failed to get responses/200/content/application/json from openapi: ref \n ${responses}"
+            return 1
+        fi
+        responses_new_ref=$(echo "$responses" | jq -r '."application/vnd.redhat.cincinnati.v1+json".schema."$ref"')
+        if [[ "${responses_new_ref}" != "#/components/schemas/Graph" ]] ; then
+            echo -e "${DATE} Error: failed to get responses/200/content/application/vnd.redhat.cincinnati.v1+json from openapi: ref \n ${responses}"
+            return 1
+        fi
+    else
+        if [[ "${responses_ref}" != "#/components/schemas/GraphError" ]] ; then
+            echo -e "${DATE} Error: failed to get responses/${http_code}/content/application/json from openapi: ref \n ${responses}"
+            return 1
+        fi
     fi
+
+    echo "The responce spec from graph API is correct: ${http_code}"
 
     return 0
 }
@@ -64,6 +81,7 @@ do
             ((openapi_retry += 1))
             continue
         fi
+        echo "components.schemas.Version spec from graph API is correct"
 
         openapi_properties_version=$(echo "${res}" | jq ".components.schemas.Graph.properties.version")
         openapi_properties_version_example=$(echo "$openapi_properties_version" | jq -r ".example")
@@ -78,6 +96,7 @@ do
             ((openapi_retry += 1))
             continue
         fi
+        echo "components.schemas.Graph.properties.version spec from graph API is correct"
 
         openapi_properties_nodes=$(echo "${res}" | jq ".components.schemas.Graph.properties.nodes")
         openapi_properties_nodes_type=$(echo "$openapi_properties_nodes" | jq -r ".type")
@@ -92,6 +111,7 @@ do
             ((openapi_retry += 1))
             continue
         fi
+        echo "components.schemas.Graph.properties.nodes spec from graph API is correct"
 
         openapi_properties_edges=$(echo "${res}" | jq ".components.schemas.Graph.properties.edges")
         openapi_properties_edges_type=$(echo "$openapi_properties_edges" | jq -r ".type")
@@ -106,6 +126,7 @@ do
             ((openapi_retry += 1))
             continue
         fi
+        echo "components.schemas.Graph.properties.edges spec from graph API is correct"
 
         openapi_properties_conditionalEdges=$(echo "${res}" | jq ".components.schemas.Graph.properties.conditionalEdges")
         openapi_properties_conditionalEdges_type=$(echo "$openapi_properties_conditionalEdges" | jq -r ".type")
@@ -120,7 +141,7 @@ do
             ((openapi_retry += 1))
             continue
         fi
-
+        echo "components.schemas.Graph.properties.conditionalEdges spec from graph API is correct"
 
 		for path in '.paths."/api/upgrades_info/graph"' '.paths."/api/upgrades_info/v1/graph"'
 		do
@@ -141,23 +162,11 @@ do
                 ((openapi_retry += 1))
                 continue
             fi
-            
 
-            DATE="$(date --iso=s --utc)"; 
-            responses=$(echo "${res}" | jq "${path}.get.responses" | jq '."200"' | jq ".content")
-            responses_ref=$(echo "$responses" | jq -r '."application/json".schema."$ref"')
-            if [[ "${responses_ref}" != "#/components/schemas/Graph" ]] ; then
-                echo "${DATE}" "Error: failed to get responses/200/content/application/json from openapi: ref"
+            if ! check_response "200" "${path}" "${res}"; then
                 ((openapi_retry += 1))
                 continue
             fi
-            responses_new_ref=$(echo "$responses" | jq -r '."application/vnd.redhat.cincinnati.v1+json".schema."$ref"')
-            if [[ "${responses_new_ref}" != "#/components/schemas/Graph" ]] ; then
-                echo "${DATE}" "Error: failed to get responses/200/content/application/vnd.redhat.cincinnati.v1+json from openapi: ref"
-                ((openapi_retry += 1))
-                continue
-            fi
-
             if ! check_response "400" "${path}" "${res}"; then
                 ((openapi_retry += 1))
                 continue

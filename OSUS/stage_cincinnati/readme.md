@@ -10,3 +10,5 @@ podman push quay.io/rhn_support_jianl/monitor_spec:latest
 oc apply -f deployment.yaml
 
 oc replace -f deployment.yaml
+
+oc scale --replicas 1 deployments/cincinnati-monitor

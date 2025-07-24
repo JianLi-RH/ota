@@ -15,6 +15,7 @@ spec:
       labels:
         app: cincinnati-monitor
     spec:
+      maxRetries: "3"
       containers:
       - name: cincinnati-monitor
         image: quay.io/rhn_support_jianl/monitor:latest

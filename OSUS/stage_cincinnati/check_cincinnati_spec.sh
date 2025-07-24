@@ -2,8 +2,8 @@
 
 function send_slack() {
 	local message="$1"
-	url="https://hooks.slack.com/triggers/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"
-	curl -X POST "${url}" -d '{"msg": "'"${message}"'"}'
+	# slack-url is coming from secret slack-workflow
+	curl -X POST "${slack-url}" -d '{"msg": "'"${message}"'"}'
 }
 
 function check_parameter() {

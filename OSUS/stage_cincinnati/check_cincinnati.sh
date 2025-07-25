@@ -93,5 +93,53 @@ do
 		send_slack "${DATE} Error: failed to get graph data with invalid parameters"
 		break
 	fi
+
+	echo -e "\n\n"
+	echo "=================OCPBUGS-25833: versions should not appear in both Edges and conditionalEdges================="
+	appear_test_url="${host}/api/upgrades_info/graph?arch=amd64&channel=fast-4.19&version=4.19.6"
+	result=$(curl -skH 'Accept:application/json' "$appear_test_url" | jq '
+  (.nodes | with_entries(.key |= tostring)) as $nodes_by_index |
+  (
+    [
+      .edges[] |
+      select($nodes_by_index[(.[0] | tostring)].version == "4.18.1")[1] |
+      tostring |
+      $nodes_by_index[.].version
+    ] |
+      join(" ")
+  ) as $edges |
+  (
+    [
+      .conditionalEdges[] |
+      .risks as $r |
+      .edges[] |
+      select(.from == "4.18.1") |
+      .to as $to |
+      $to
+    ] |
+      join(" ")
+  ) as $conditionalEdges |
+  {
+      edges: $edges,
+      conditionalEdges: $conditionalEdges
+  }')
+	edges=$(echo "$result" | jq -r ".edges")
+	conditionalEdges=$(echo "$result" | jq -r ".conditionalEdges")
+
+	DATE="$(date --iso=s --utc)"; 
+	read -r -a arrEdges <<< "$edges"
+	read -r -a arrConditionalEdges <<< "$conditionalEdges"
+	for edge in "${arrEdges[@]}"
+	do
+		for conditionalEdge in "${arrConditionalEdges[@]}"
+		do
+			if [[ "${edge}" == "${conditionalEdge}" ]]; then
+				echo "${DATE} Error: Version ${edge} appears in both edges and conditionalEdges"
+				send_slack "${DATE} Error: Version ${edge} appears in both edges and conditionalEdges"
+				break
+			fi
+		done
+	done
+	echo "${DATE} Check edges and conditionalEdges passed"
 	echo -e "\n\n"
 done

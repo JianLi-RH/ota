@@ -22,6 +22,24 @@ function check_parameter() {
     return 0
 }
 
+function check_property() {
+        local property="$1" type="$2" items="$3" res="$4" 
+
+        result=$(echo "${res}" | jq ".components.schemas.Graph.properties.${property}")
+        type=$(echo "$result" | jq -r ".type")
+        if [[ "${type}" != "${type}" ]] ; then
+            echo "${DATE}" "Error: failed to get schemas' Graph/properties/${property}/type from openapi"
+            return 1
+        fi
+        ref=$(echo "$result" | jq -r '.items."$ref"')
+        if [[ "${ref}" != "${items}" ]] ; then
+            echo "${DATE}" "Error: failed to get schemas' Graph/properties/${property}/items from openapi"
+            return 1
+        fi
+        echo "Spec components.schemas.Graph.properties.${property} from graph API is correct"
+        return 0
+}
+
 function check_response() {
     local http_code="$1" path="$2" res="$3" 
 
@@ -35,7 +53,7 @@ function check_response() {
             echo -e "${DATE} Error: failed to get responses/200/content/application/json from openapi: ref \n ${responses}"
             return 1
         fi
-        responses_new_ref=$(echo "$responses" | jq -r '."application/vnd.redhat.cincinnati.v1+json".schema."$ref"')
+        responses_new_ref=$(echo "$content" | jq -r '."application/vnd.redhat.cincinnati.v1+json".schema."$ref"')
         if [[ "${responses_new_ref}" != "#/components/schemas/Graph" ]] ; then
             echo -e "${DATE} Error: failed to get responses/200/content/application/vnd.redhat.cincinnati.v1+json from openapi: ref \n ${responses}"
             return 1
@@ -48,24 +66,23 @@ function check_response() {
     fi
 
     echo "The responce spec from graph API is correct: ${http_code}"
-
     return 0
 }
 
+openapi="https://api.stage.openshift.com/api/upgrades_info/openapi"
 openapi_retry=0
-while sleep 60; 
+while sleep 300; 
 do 
 	echo -e "\n\n"
 	echo "=================check openapi================="
 	if [[ $openapi_retry -lt 2 ]]; then
-		openapi="https://api.stage.openshift.com/api/upgrades_info/openapi"
         res=$(curl -s "${openapi}")
 
         DATE="$(date --iso=s --utc)"; 
         openapi_version=$(echo "${res}" | jq ".components.schemas.Version")
-        openapi_version_example=$(echo "$openapi_version" | jq -r ".example")
-        if [[ -z "${openapi_version_example}" ]] ; then
-            echo "${DATE}" "Error: failed to get schemas' Version from openapi: example"
+        openapi_version_type=$(echo "$openapi_version" | jq -r ".type")
+        if [[ "${openapi_version_type}" != "string" ]] ; then
+            echo "${DATE}" "Error: failed to get schemas' Version from openapi: type"
             ((openapi_retry += 1))
             continue
         fi
@@ -75,73 +92,54 @@ do
             ((openapi_retry += 1))
             continue
         fi
-        openapi_version_type=$(echo "$openapi_version" | jq -r ".type")
-        if [[ "${openapi_version_type}" != "string" ]] ; then
-            echo "${DATE}" "Error: failed to get schemas' Version from openapi: type"
+        openapi_version_example=$(echo "$openapi_version" | jq -r ".example")
+        if [[ -z "${openapi_version_example}" ]] ; then
+            echo "${DATE}" "Error: failed to get schemas' Version from openapi: example"
             ((openapi_retry += 1))
             continue
         fi
         echo "components.schemas.Version spec from graph API is correct"
 
         openapi_properties_version=$(echo "${res}" | jq ".components.schemas.Graph.properties.version")
+        openapi_properties_version_type=$(echo "$openapi_properties_version" | jq -r ".type")
+        if [[ "${openapi_properties_version_type}" != "integer" ]] ; then
+            echo "${DATE}" "Error: failed to get schemas' Graph/properties/version from openapi: type"
+            ((openapi_retry += 1))
+            continue
+        fi
         openapi_properties_version_example=$(echo "$openapi_properties_version" | jq -r ".example")
         if [[ "${openapi_properties_version_example}" != "1" ]] ; then
             echo "${DATE}" "Error: failed to get schemas' Graph/properties/version from openapi: example"
             ((openapi_retry += 1))
             continue
         fi
-        openapi_properties_version_example=$(echo "$openapi_properties_version" | jq -r ".type")
-        if [[ "${openapi_properties_version_example}" != "integer" ]] ; then
-            echo "${DATE}" "Error: failed to get schemas' Graph/properties/version from openapi: type"
+        openapi_properties_version_min=$(echo "$openapi_properties_version" | jq -r ".minimum")
+        if [[ "${openapi_properties_version_min}" != "1" ]] ; then
+            echo "${DATE}" "Error: failed to get schemas' Graph/properties/version from openapi: minimum"
             ((openapi_retry += 1))
             continue
         fi
-        echo "components.schemas.Graph.properties.version spec from graph API is correct"
+        openapi_properties_version_max=$(echo "$openapi_properties_version" | jq -r ".maximum")
+        if [[ "${openapi_properties_version_max}" != "2147483647" ]] ; then
+            echo "${DATE}" "Error: failed to get schemas' Graph/properties/version from openapi: maximum"
+            ((openapi_retry += 1))
+            continue
+        fi
+        echo "Spec components.schemas.Graph.properties.version from graph API is correct"
 
-        openapi_properties_nodes=$(echo "${res}" | jq ".components.schemas.Graph.properties.nodes")
-        openapi_properties_nodes_type=$(echo "$openapi_properties_nodes" | jq -r ".type")
-        if [[ "${openapi_properties_nodes_type}" != "array" ]] ; then
-            echo "${DATE}" "Error: failed to get schemas' Graph/properties/nodes from openapi: type"
+        if ! check_property "nodes" "array" "#/components/schemas/Node" "${res}"; then
             ((openapi_retry += 1))
             continue
         fi
-        openapi_properties_nodes_items=$(echo "$openapi_properties_nodes" | jq -r '.items."$ref"')
-        if [[ "${openapi_properties_nodes_items}" != "#/components/schemas/Node" ]] ; then
-            echo "${DATE}" "Error: failed to get schemas' Graph/properties/nodes/items from openapi: items"
+        if ! check_property "edges" "array" "#/components/schemas/Edge" "${res}"; then
             ((openapi_retry += 1))
             continue
         fi
-        echo "components.schemas.Graph.properties.nodes spec from graph API is correct"
+        if ! check_property "conditionalEdges" "array" "#/components/schemas/ConditionalEdges" "${res}"; then
+            ((openapi_retry += 1))
+            continue
+        fi
 
-        openapi_properties_edges=$(echo "${res}" | jq ".components.schemas.Graph.properties.edges")
-        openapi_properties_edges_type=$(echo "$openapi_properties_edges" | jq -r ".type")
-        if [[ "${openapi_properties_edges_type}" != "array" ]] ; then
-            echo "${DATE}" "Error: failed to get schemas' Graph/properties/edges from openapi: type"
-            ((openapi_retry += 1))
-            continue
-        fi
-        openapi_properties_edges_items=$(echo "$openapi_properties_edges" | jq -r '.items."$ref"')
-        if [[ "${openapi_properties_edges_items}" != "#/components/schemas/Edge" ]] ; then
-            echo "${DATE}" "Error: failed to get schemas' Graph/properties/edges/items from openapi: ref"
-            ((openapi_retry += 1))
-            continue
-        fi
-        echo "components.schemas.Graph.properties.edges spec from graph API is correct"
-
-        openapi_properties_conditionalEdges=$(echo "${res}" | jq ".components.schemas.Graph.properties.conditionalEdges")
-        openapi_properties_conditionalEdges_type=$(echo "$openapi_properties_conditionalEdges" | jq -r ".type")
-        if [[ "${openapi_properties_conditionalEdges_type}" != "array" ]] ; then
-            echo "${DATE}" "Error: failed to get schemas' Graph/properties/edges from openapi: type"
-            ((openapi_retry += 1))
-            continue
-        fi
-        openapi_properties_conditionalEdges_items=$(echo "$openapi_properties_conditionalEdges" | jq -r '.items."$ref"')
-        if [[ "${openapi_properties_conditionalEdges_items}" != "#/components/schemas/ConditionalEdges" ]] ; then
-            echo "${DATE}" "Error: failed to get schemas' Graph/properties/conditionalEdges/items from openapi: ref"
-            ((openapi_retry += 1))
-            continue
-        fi
-        echo "components.schemas.Graph.properties.conditionalEdges spec from graph API is correct"
 
 		for path in '.paths."/api/upgrades_info/graph"' '.paths."/api/upgrades_info/v1/graph"'
 		do
@@ -185,7 +183,7 @@ do
             fi
 		done
 	fi
-	if [[ $openapi_retry -eq 2 ]]; then
+	if [[ $openapi_retry -ge 2 ]]; then
         DATE="$(date --iso=s --utc)"; 
         echo "${DATE} Error: failed to check response schema of openapi"
 		send_slack "${DATE} Error: failed to check response schema of openapi"

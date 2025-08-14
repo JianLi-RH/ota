@@ -1,7 +1,7 @@
 {
     "nodes": [
       {
-        "version": "4.20.0-ec.5",
+        "version": "4.20.0-0.nightly-2025-08-12-153542",
         "payload": "registry.ci.openshift.org/ocp/release@sha256:c00dbb768955694cabe901e12aa5c6ac2121fcc77d2c376e2806a07942da5966",
         "metadata": {
             "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.20.0-0.nightly/release/4.20.0-0.nightly-2025-06-16-162515",
@@ -30,7 +30,7 @@
     "conditionalEdges":[
       {
         "edges": [
-          {"from": "4.20.0-ec.5", "to": "4.999.999"}
+          {"from": "4.20.0-0.nightly-2025-08-12-153542", "to": "4.999.999"}
         ],
         "risks": [
           {

@@ -5,7 +5,7 @@
         "payload": "registry.ci.openshift.org/ocp/release@sha256:c00dbb768955694cabe901e12aa5c6ac2121fcc77d2c376e2806a07942da5966",
         "metadata": {
             "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.20.0-0.nightly/release/4.20.0-0.nightly-2025-06-16-162515",
-            "io.openshift.upgrades.graph.release.channels": "stable-4.19"
+            "io.openshift.upgrades.graph.release.channels": "channel-a"
         }
       },
       {
@@ -19,6 +19,7 @@
         "version": "4.999.999",
         "payload": "quay.io/openshift-release-dev/ocp-release@sha256:9d24a8cdd67b8f18c99547d5910e4863e7aab5bd888e26670a00dbda0a9d4687",
         "metadata": {
+            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.999.999",
             "io.openshift.upgrades.graph.release.channels": "channel-a"
         }
       }

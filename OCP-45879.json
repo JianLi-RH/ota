@@ -1,52 +1,52 @@
 {
   "nodes": [
     {
-      "version": "4.19.0-0.nightly-2025-05-11-153555",
+      "version": "4.20.0-0.nightly-2025-09-10-095237",
       "payload": "registry.ci.openshift.org/ocp/release@sha256:5098d6e4065e9c532bad7a6d6ed88d50d754279b64527f73014e33655540fda1",
       "metadata": {
-        "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        "io.openshift.upgrades.graph.release.channels": "candidate-4.21"
       }
     },
     {
-      "version": "4.19.0-0.nightly-2025-05-11-230421",
+      "version": "4.21.1",
       "payload": "registry.ci.openshift.org/ocp/release@sha256:09b8d43ce2736e515b309d0d30b15127ad2382c0300836bede952cbfbca77f2d",
       "metadata": {
-        "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        "io.openshift.upgrades.graph.release.channels": "candidate-4.21"
       }
     },
     {
-      "version": "4.19.0-0.nightly-2025-05-12-071854",
+      "version": "4.21.2",
       "payload": "registry.ci.openshift.org/ocp/release@sha256:d853a52fae9cce2657ea651d5811d473eac8cf2111c1fa2844b28336fb91e12b",
       "metadata": {
-        "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        "io.openshift.upgrades.graph.release.channels": "candidate-4.21"
       }
     },
     {
-      "version": "4.19.0-ec.2",
+      "version": "4.21.3",
       "payload": "quay.io/openshift-release-dev/ocp-release@sha256:573a86d57acab6dfb90799f568421e80a41f85aaef1e94a16e13af13339524c1",
       "metadata": {
-        "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        "io.openshift.upgrades.graph.release.channels": "candidate-4.21"
       }
     },
     {
-      "version": "4.19.0-ec.3",
+      "version": "4.21.4",
       "payload": "quay.io/openshift-release-dev/ocp-release@sha256:3c7decd8e09329d5206a96bcc19838d25bdc3af9c9565f249aa91494c7beb7db",
       "metadata": {
-        "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        "io.openshift.upgrades.graph.release.channels": "candidate-4.21"
       }
     },
     {
-      "version": "4.19.0-ec.4",
+      "version": "4.21.5",
       "payload": "quay.io/openshift-release-dev/ocp-release@sha256:1e9baecce90105b4c0aa695dadc2fac7e4b9fd54e0d2ede90e143e57df8e424a",
       "metadata": {
-        "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        "io.openshift.upgrades.graph.release.channels": "candidate-4.21"
       }
     },
     {
-      "version": "4.19.0-ec.5",
+      "version": "4.21.6",
       "payload": "quay.io/openshift-release-dev/ocp-release@sha256:fde51d1c35425759c83ea0895d0d4fc0f88f6a49a0d080207f15a7bbe3e9982c",
       "metadata": {
-        "io.openshift.upgrades.graph.release.channels": "candidate-4.19"
+        "io.openshift.upgrades.graph.release.channels": "candidate-4.21"
       }
     }
   ],
@@ -61,7 +61,7 @@
   "conditionalEdges":[
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-0.nightly-2025-05-11-230421"}
+        {"from": "4.20.0-0.nightly-2025-09-10-095237", "to": "4.21.1"}
       ],
       "risks": [
         {
@@ -78,7 +78,7 @@
     },
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-ec.2"}
+        {"from": "4.20.0-0.nightly-2025-09-10-095237", "to": "4.21.3"}
       ],
       "risks": [
         {
@@ -111,7 +111,7 @@
     },
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-ec.3"}
+        {"from": "4.20.0-0.nightly-2025-09-10-095237", "to": "4.21.4"}
       ],
       "risks": [
         {
@@ -131,7 +131,7 @@
     },
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-ec.4"}
+        {"from": "4.20.0-0.nightly-2025-09-10-095237", "to": "4.21.5"}
       ],
       "risks": [
         {
@@ -177,7 +177,7 @@
     },
     {
       "edges": [
-        {"from": "4.19.0-0.nightly-2025-05-11-153555", "to": "4.19.0-ec.5"}
+        {"from": "4.20.0-0.nightly-2025-09-10-095237", "to": "4.21.6"}
       ],
       "risks": [
         {

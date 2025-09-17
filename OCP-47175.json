@@ -8,8 +8,8 @@
         }
       },
       {
-        "version": "4.20.0-rc.3",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:71b3ab49573d115389214a6f9091251af6f07e14917356b86d594f7b8c90bb53",
+        "version": "4.20.0-0.nightly-2025-09-15-100049",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:6fe1a264228a38dd790e28aeba712a52c517f484e974a5847665c465af153e6d",
         "metadata": {
             "io.openshift.upgrades.graph.release.channels": "candidate-4.20"
         }

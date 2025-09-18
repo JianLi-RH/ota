@@ -1,7 +1,7 @@
 {
     "nodes": [
       {
-        "version": "4.21.0-0-2025-09-17-064404-test-ci-ln-i81fzhb-latest",
+        "version": "4.21.0-0-2025-09-18-063941-test-ci-ln-54rkp1b-latest",
         "payload": "registry.ci.openshift.org/ocp/release@sha256:47ac2154b2fb4e4d9ad72dcb01db26f1c646509a486a45672ec156ee029b21c5",
         "metadata": {
             "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.22"

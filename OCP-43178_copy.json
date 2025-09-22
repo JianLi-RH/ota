@@ -1,27 +1,27 @@
 {
     "nodes": [
       {
-        "version": "4.21.0-0-2025-09-19-013844-test-ci-ln-p78ph8t-latest",
-        "payload": "registry.ci.openshift.org/ocp/release@sha256:47ac2154b2fb4e4d9ad72dcb01db26f1c646509a486a45672ec156ee029b21c5",
+        "version": "4.21.0-0-2025-09-22-021508-test-ci-ln-h5f9r0b-latest",
+        "payload": "registry.build10.ci.openshift.org/ci-ln-h5f9r0b/release:latest",
         "metadata": {
             "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.21.0-0-2025-09-19-013844-test-ci-ln-p78ph8t-latest",
-            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.22"
+            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.21"
         }
       },
       {
-        "version": "4.22.0-rc.1",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:23e31abd998aa80ee11344e6ad910d8283d4f2f973c79e9d7fecbd355be459ab",
+        "version": "4.21.0-ec.0",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:ddd3acafe8a932cfda7be07d41f27b66ff2c05d66ba664dc74330b4fc9d2db38",
         "metadata": {
-            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.22.0-rc.1",
-            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.22"
+            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-dev-preview/release/4.21.0-ec.0",
+            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.21"
         }
       },
       {
-        "version": "4.22.0-rc.2",
-        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:668c92b06279cb5c7a2a692860b297eeb9013af10d49d2095f2c3fe9ad02baaa",
+        "version": "4.21.0-0.nightly-2025-09-19-012417",
+        "payload": "registry.ci.openshift.org/ocp/release@sha256:d5d8edb79de29e0219dd608e38f82f3ccd1ff1f1955f84dd7c7979c0fc05f4aa",
         "metadata": {
-            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.22.0-rc.2",
-            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.22"
+            "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4.21.0-0.nightly/release/4.21.0-0.nightly-2025-09-19-012417",
+            "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.21"
         }
       }
     ],

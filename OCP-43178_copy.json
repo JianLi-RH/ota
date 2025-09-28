@@ -1,8 +1,8 @@
 {
     "nodes": [
       {
-        "version": "4.21.0-0-2025-09-22-021508-test-ci-ln-h5f9r0b-latest",
-        "payload": "registry.build10.ci.openshift.org/ci-ln-h5f9r0b/release@sha256:387f453bc04a20a354bf83515d3a0592c31ae0e2ea9ba71a559fa926f6017b7e",
+        "version": "4.21.0-0-2025-09-28-021746-test-ci-ln-fk88t5b-latest",
+        "payload": "registry.build07.ci.openshift.org/ci-ln-fk88t5b/release@sha256:0b9065f718c38a781f518460da299a98a3fe191f8414864388d92145de008a78",
         "metadata": {
             "url": "https://amd64.ocp.releases.ci.openshift.org/releasestream/4-stable/release/4.21.0-0-2025-09-19-013844-test-ci-ln-p78ph8t-latest",
             "io.openshift.upgrades.graph.release.channels": "channel-a,channel-b,stable-4.21"

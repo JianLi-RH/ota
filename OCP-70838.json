@@ -1,0 +1,21 @@
+{
+    "nodes": [
+      {
+        "version": "4.21.0-ec.1",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:db8ee32fa253e1dcd5977a9c75d426f251139b5372f960688e6bdbcf9da8ded7",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "candidate-4.21"
+        }
+      },
+      {
+        "version": "4.21.0-ec.3",
+        "payload": "quay.io/openshift-release-dev/ocp-release@sha256:e3a750749770f4435360852de7c566e370bef20ad90cdc1446e8ac84e4728e49",
+        "metadata": {
+            "io.openshift.upgrades.graph.release.channels": "candidate-4.21"
+        }
+      }
+    ],
+    "edges": [
+      [1,2]
+    ]
+  }
